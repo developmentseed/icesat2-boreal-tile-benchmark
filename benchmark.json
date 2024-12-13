@@ -1,0 +1,594 @@
+{
+    "machine_info": {
+        "node": "fv-az1542-478",
+        "processor": "x86_64",
+        "machine": "x86_64",
+        "python_compiler": "Clang 18.1.8 ",
+        "python_implementation": "CPython",
+        "python_implementation_version": "3.13.1",
+        "python_version": "3.13.1",
+        "python_build": [
+            "main",
+            "Dec  6 2024 18:40:43"
+        ],
+        "release": "6.5.0-1025-azure",
+        "system": "Linux",
+        "cpu": {
+            "python_version": "3.13.1.final.0 (64 bit)",
+            "cpuinfo_version": [
+                9,
+                0,
+                0
+            ],
+            "cpuinfo_version_string": "9.0.0",
+            "arch": "X86_64",
+            "bits": 64,
+            "count": 4,
+            "arch_string_raw": "x86_64",
+            "vendor_id_raw": "AuthenticAMD",
+            "brand_raw": "AMD EPYC 7763 64-Core Processor",
+            "hz_advertised_friendly": "2.9114 GHz",
+            "hz_actual_friendly": "2.9114 GHz",
+            "hz_advertised": [
+                2911442000,
+                0
+            ],
+            "hz_actual": [
+                2911442000,
+                0
+            ],
+            "stepping": 1,
+            "model": 1,
+            "family": 25,
+            "flags": [
+                "3dnowprefetch",
+                "abm",
+                "adx",
+                "aes",
+                "aperfmperf",
+                "apic",
+                "arat",
+                "avx",
+                "avx2",
+                "bmi1",
+                "bmi2",
+                "clflush",
+                "clflushopt",
+                "clwb",
+                "clzero",
+                "cmov",
+                "cmp_legacy",
+                "constant_tsc",
+                "cpuid",
+                "cr8_legacy",
+                "cx16",
+                "cx8",
+                "de",
+                "decodeassists",
+                "erms",
+                "extd_apicid",
+                "f16c",
+                "flushbyasid",
+                "fma",
+                "fpu",
+                "fsgsbase",
+                "fsrm",
+                "fxsr",
+                "fxsr_opt",
+                "ht",
+                "hypervisor",
+                "invpcid",
+                "invpcid_single",
+                "lahf_lm",
+                "lm",
+                "mca",
+                "mce",
+                "misalignsse",
+                "mmx",
+                "mmxext",
+                "movbe",
+                "msr",
+                "mtrr",
+                "nonstop_tsc",
+                "nopl",
+                "npt",
+                "nrip_save",
+                "nx",
+                "osvw",
+                "pae",
+                "pat",
+                "pausefilter",
+                "pcid",
+                "pclmulqdq",
+                "pdpe1gb",
+                "pfthreshold",
+                "pge",
+                "pni",
+                "popcnt",
+                "pse",
+                "pse36",
+                "rdpid",
+                "rdpru",
+                "rdrand",
+                "rdseed",
+                "rdtscp",
+                "rep_good",
+                "sep",
+                "sha_ni",
+                "smap",
+                "smep",
+                "sse",
+                "sse2",
+                "sse4_1",
+                "sse4_2",
+                "sse4a",
+                "ssse3",
+                "svm",
+                "syscall",
+                "topoext",
+                "tsc",
+                "tsc_reliable",
+                "tsc_scale",
+                "umip",
+                "v_vmsave_vmload",
+                "vaes",
+                "vmcb_clean",
+                "vme",
+                "vmmcall",
+                "vpclmulqdq",
+                "xgetbv1",
+                "xsave",
+                "xsavec",
+                "xsaveerptr",
+                "xsaveopt",
+                "xsaves"
+            ],
+            "l3_cache_size": 524288,
+            "l2_cache_size": 1048576,
+            "l1_data_cache_size": 65536,
+            "l1_instruction_cache_size": 65536
+        }
+    },
+    "commit_info": {
+        "id": "bad8020f6e3f134cc587bcb8ef68ff151535e598",
+        "time": "2024-12-13T10:39:39-06:00",
+        "author_time": "2024-12-13T10:39:39-06:00",
+        "dirty": false,
+        "project": "icesat2-boreal-tile-benchmark",
+        "branch": "main"
+    },
+    "benchmarks": [
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[6-titiler-pgstac]",
+            "fullname": "tile_benchmark_test.py::test_tiles[6-titiler-pgstac]",
+            "params": {
+                "zoom": 6,
+                "source": "titiler-pgstac"
+            },
+            "param": "6-titiler-pgstac",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 0.37370580399999653,
+                "max": 7.617981629999974,
+                "mean": 2.8641243993333205,
+                "stddev": 4.118525088272696,
+                "rounds": 3,
+                "median": 0.6006857639999907,
+                "iqr": 5.433206869499983,
+                "q1": 0.4304507939999951,
+                "q3": 5.863657663499978,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 0.37370580399999653,
+                "hd15iqr": 7.617981629999974,
+                "ops": 0.3491468457978882,
+                "total": 8.592373197999962,
+                "data": [
+                    0.37370580399999653,
+                    7.617981629999974,
+                    0.6006857639999907
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[6-mosaicjson]",
+            "fullname": "tile_benchmark_test.py::test_tiles[6-mosaicjson]",
+            "params": {
+                "zoom": 6,
+                "source": "mosaicjson"
+            },
+            "param": "6-mosaicjson",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 27.46323426999993,
+                "max": 28.15497910600004,
+                "mean": 27.873058093000015,
+                "stddev": 0.36317637056620183,
+                "rounds": 3,
+                "median": 28.000960903000077,
+                "iqr": 0.5188086270000838,
+                "q1": 27.597665928249967,
+                "q3": 28.11647455525005,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 27.46323426999993,
+                "hd15iqr": 28.15497910600004,
+                "ops": 0.03587693882255202,
+                "total": 83.61917427900005,
+                "data": [
+                    28.15497910600004,
+                    27.46323426999993,
+                    28.000960903000077
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[7-titiler-pgstac]",
+            "fullname": "tile_benchmark_test.py::test_tiles[7-titiler-pgstac]",
+            "params": {
+                "zoom": 7,
+                "source": "titiler-pgstac"
+            },
+            "param": "7-titiler-pgstac",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 0.37163873299994066,
+                "max": 0.7822453180000366,
+                "mean": 0.5169761816666778,
+                "stddev": 0.23008074493812672,
+                "rounds": 3,
+                "median": 0.39704449400005615,
+                "iqr": 0.30795493875007196,
+                "q1": 0.37799017324996953,
+                "q3": 0.6859451120000415,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 0.37163873299994066,
+                "hd15iqr": 0.7822453180000366,
+                "ops": 1.9343250916823738,
+                "total": 1.5509285450000334,
+                "data": [
+                    0.37163873299994066,
+                    0.39704449400005615,
+                    0.7822453180000366
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[7-mosaicjson]",
+            "fullname": "tile_benchmark_test.py::test_tiles[7-mosaicjson]",
+            "params": {
+                "zoom": 7,
+                "source": "mosaicjson"
+            },
+            "param": "7-mosaicjson",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 11.123816790999967,
+                "max": 12.188128995000056,
+                "mean": 11.621902945666685,
+                "stddev": 0.5354179683478774,
+                "rounds": 3,
+                "median": 11.553763051000033,
+                "iqr": 0.7982341530000667,
+                "q1": 11.231303355999984,
+                "q3": 12.02953750900005,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 11.123816790999967,
+                "hd15iqr": 12.188128995000056,
+                "ops": 0.08604442875448874,
+                "total": 34.86570883700006,
+                "data": [
+                    11.553763051000033,
+                    12.188128995000056,
+                    11.123816790999967
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[8-titiler-pgstac]",
+            "fullname": "tile_benchmark_test.py::test_tiles[8-titiler-pgstac]",
+            "params": {
+                "zoom": 8,
+                "source": "titiler-pgstac"
+            },
+            "param": "8-titiler-pgstac",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 0.36701841499996135,
+                "max": 0.39244558699999743,
+                "mean": 0.37709577533329747,
+                "stddev": 0.013508675963130979,
+                "rounds": 3,
+                "median": 0.37182332399993356,
+                "iqr": 0.01907037900002706,
+                "q1": 0.3682196422499544,
+                "q3": 0.38729002124998146,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 0.36701841499996135,
+                "hd15iqr": 0.39244558699999743,
+                "ops": 2.6518462030399212,
+                "total": 1.1312873259998923,
+                "data": [
+                    0.39244558699999743,
+                    0.36701841499996135,
+                    0.37182332399993356
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[8-mosaicjson]",
+            "fullname": "tile_benchmark_test.py::test_tiles[8-mosaicjson]",
+            "params": {
+                "zoom": 8,
+                "source": "mosaicjson"
+            },
+            "param": "8-mosaicjson",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 6.243319296999971,
+                "max": 6.8747421669999085,
+                "mean": 6.5123407603332835,
+                "stddev": 0.3259042352477781,
+                "rounds": 3,
+                "median": 6.41896081699997,
+                "iqr": 0.4735671524999532,
+                "q1": 6.287229676999971,
+                "q3": 6.760796829499924,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 6.243319296999971,
+                "hd15iqr": 6.8747421669999085,
+                "ops": 0.15355461834721665,
+                "total": 19.53702228099985,
+                "data": [
+                    6.8747421669999085,
+                    6.243319296999971,
+                    6.41896081699997
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[9-titiler-pgstac]",
+            "fullname": "tile_benchmark_test.py::test_tiles[9-titiler-pgstac]",
+            "params": {
+                "zoom": 9,
+                "source": "titiler-pgstac"
+            },
+            "param": "9-titiler-pgstac",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 0.3625731380000161,
+                "max": 0.3675467479999952,
+                "mean": 0.3649623273333494,
+                "stddev": 0.002492546000198038,
+                "rounds": 3,
+                "median": 0.3647670960000369,
+                "iqr": 0.003730207499984317,
+                "q1": 0.3631216275000213,
+                "q3": 0.3668518350000056,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 0.3625731380000161,
+                "hd15iqr": 0.3675467479999952,
+                "ops": 2.7400088313406106,
+                "total": 1.0948869820000482,
+                "data": [
+                    0.3675467479999952,
+                    0.3647670960000369,
+                    0.3625731380000161
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[9-mosaicjson]",
+            "fullname": "tile_benchmark_test.py::test_tiles[9-mosaicjson]",
+            "params": {
+                "zoom": 9,
+                "source": "mosaicjson"
+            },
+            "param": "9-mosaicjson",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 4.78295265099996,
+                "max": 5.006268372000022,
+                "mean": 4.8947261973333225,
+                "stddev": 0.11165804028855496,
+                "rounds": 3,
+                "median": 4.894957568999985,
+                "iqr": 0.16748679075004702,
+                "q1": 4.810953880499966,
+                "q3": 4.978440671250013,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 4.78295265099996,
+                "hd15iqr": 5.006268372000022,
+                "ops": 0.2043015195711675,
+                "total": 14.684178591999967,
+                "data": [
+                    5.006268372000022,
+                    4.78295265099996,
+                    4.894957568999985
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[10-titiler-pgstac]",
+            "fullname": "tile_benchmark_test.py::test_tiles[10-titiler-pgstac]",
+            "params": {
+                "zoom": 10,
+                "source": "titiler-pgstac"
+            },
+            "param": "10-titiler-pgstac",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 0.3592144340000232,
+                "max": 0.3636586380000608,
+                "mean": 0.3615576280000141,
+                "stddev": 0.0022319782964579636,
+                "rounds": 3,
+                "median": 0.36179981199995837,
+                "iqr": 0.0033331530000282328,
+                "q1": 0.359860778500007,
+                "q3": 0.3631939315000352,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 0.3592144340000232,
+                "hd15iqr": 0.3636586380000608,
+                "ops": 2.7658108211727757,
+                "total": 1.0846728840000424,
+                "data": [
+                    0.3592144340000232,
+                    0.3636586380000608,
+                    0.36179981199995837
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": "icesat2-boreal",
+            "name": "test_tiles[10-mosaicjson]",
+            "fullname": "tile_benchmark_test.py::test_tiles[10-mosaicjson]",
+            "params": {
+                "zoom": 10,
+                "source": "mosaicjson"
+            },
+            "param": "10-mosaicjson",
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 3,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 2
+            },
+            "stats": {
+                "min": 4.734516821999932,
+                "max": 4.859574635000058,
+                "mean": 4.781643382999998,
+                "stddev": 0.06798206299309775,
+                "rounds": 3,
+                "median": 4.750838692000002,
+                "iqr": 0.0937933597500944,
+                "q1": 4.73859728949995,
+                "q3": 4.832390649250044,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 4.734516821999932,
+                "hd15iqr": 4.859574635000058,
+                "ops": 0.2091331201225218,
+                "total": 14.344930148999993,
+                "data": [
+                    4.750838692000002,
+                    4.859574635000058,
+                    4.734516821999932
+                ],
+                "iterations": 1
+            }
+        }
+    ],
+    "datetime": "2024-12-13T16:48:26.535063+00:00",
+    "version": "5.1.0"
+}
