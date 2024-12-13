@@ -1,0 +1,15 @@
+[project]
+name = "icesat2-boreal-tile-benchmark"
+version = "0.1.0"
+description = "Benchmarks for tile rendering performance for the icesat2-boreal dataset"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "morecantile>=6.1.0",
+    "pytest>=8.3.4",
+    "pytest-benchmark>=5.1.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-vv"
