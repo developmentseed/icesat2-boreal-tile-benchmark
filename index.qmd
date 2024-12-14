@@ -22,6 +22,7 @@ We are testing two dynamic tile rendering services that use different methods to
 - Queries a `pgstac` database to determine which STAC items in the `icesat2-boreal` collection are required to render an image for an XYZ tile
 - Requires a Lambda and Postgresql database to be deployed
 - Struggles to render tiles at zoom levels 5 and below
+- See deployment details in [maap-eoapi](https://github.com/MAAP-Project/maap-eoapi)
 
 ### titiler: `/mosaicjson/{mosaic_id}/tiles` endpoint 
 - Queries a MosaicJSON document in a dynamodb table to get the pre-calculated list of assets required to render an image for an XYZ tile

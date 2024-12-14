@@ -3,9 +3,9 @@ project:
 
 website:
   title: "icesat2-boreal tile benchmarking"
-  site-url: "https://developmentseed.org/icesat2-boreal-tile-benchmark"
-  repo-url: https://github.com/developmentseed/icesat2-boreal-tile-benchmark"
-  repo-actions: [edit, issue]
+  site-url: https://developmentseed.org/icesat2-boreal-tile-benchmark
+  repo-url: https://github.com/developmentseed/icesat2-boreal-tile-benchmark
+  repo-actions: [source]
   page-navigation: true
 
   page-footer:
