@@ -1,0 +1,36 @@
+/*-- scss:defaults --*/
+// Override Bootstrap and Quarto variables
+$primary:   #cf3f02;
+$link-color: $primary;
+$link-hover-color: lighten($primary, 10%);
+$code-color: $primary;
+$blockquote-border-color: $primary;
+
+/*-- scss:rules --*/
+// Custom styling
+
+// Lists
+ul {
+  li::marker {
+    color: $primary;
+  }
+}
+
+// Text selection
+::selection {
+  background: $primary;
+  color: $white;
+}
+
+// Utility classes
+.scrollable {
+  max-height: 60%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.hide-title {
+  h2 {
+    display: none;
+  }
+}

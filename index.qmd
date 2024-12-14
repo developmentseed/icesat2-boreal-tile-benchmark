@@ -1,0 +1,223 @@
+---
+author: Henry Rodman
+date: 2024-12-13
+---
+Tile rendering time has a big impact on the user experience so the goal is to minimize the time it takes to properly render tiles.
+
+## icesat2-boreal collection
+<img src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/10/boreal_forest_above_ground_biomass_density/23753507-5-eng-GB/Boreal_Forest_Above_Ground_Biomass_Density_pillars.png" width="500"/>
+
+The icesat2-boreal collection is a MAAP dataset contains aboveground biomass predictions for the boreal region. The predictions are stored in cloud-optimized geotiffs (COGs) in AWS S3 storage. The collection can be visualized using dynamic tiling applications like `titiler`. For more details about the underlying data, check out the [product page](https://ceos.org/gst/icesat2-boreal-biomass.html).
+
+Relevant details:
+
+- resolution: 30 meters
+- ~4900 90x90 km COGs
+
+## Tiling service details
+
+We are testing two dynamic tile rendering services that use different methods to construct the list of assets required for each tile. Both services are deployed as serverless functions on AWS in the `us-west-2` region and are reading raster data from the same S3 bucket and returning rendered tile images to the client.
+
+### titiler-pgstac: `/collections/{collection_id}/tiles` endpoint
+- Queries a `pgstac` database to determine which STAC items in the `icesat2-boreal` collection are required to render an image for an XYZ tile
+- Requires a Lambda and Postgresql database to be deployed
+- Struggles to render tiles at zoom levels 5 and below
+
+### titiler: `/mosaicjson/{mosaic_id}/tiles` endpoint 
+- Queries a MosaicJSON document in a dynamodb table to get the pre-calculated list of assets required to render an image for an XYZ tile
+- Requires a Lambda but does not require a database instance
+- Struggles to render tiles at zoom levels 6 and below
+
+## Tile rendering benchmark comparison
+This benchmark simulates map browsing behavior by requesting a viewport of 63 tiles (9×7 grid) centered at -102°W, 57°N. The test makes concurrent requests using async/await to mirror how modern web browsers load map tiles.
+
+Each test includes warmup iterations and multiple rounds to ensure reliable measurements. Results show the total time to load a complete viewport, with success and error counts providing insight into service reliability. Lower response times indicate better perceived performance for end users.
+
+
+```{python}
+#| label: load
+#| echo: false
+
+import json
+from urllib.parse import urlencode
+
+import hvplot.pandas
+import matplotlib.colors
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from folium import Element, TileLayer
+from folium.plugins import DualMap
+from IPython.display import HTML, display
+
+
+def load_benchmark_results() -> pd.DataFrame:
+    """Load benchmark results from JSON file into a pandas DataFrame."""
+    with open("./benchmark.json") as f:
+        data = json.load(f)
+
+    # Extract the benchmarks into a list of records
+    records = []
+    for benchmark in data["benchmarks"]:
+        record = {
+            "source": benchmark["params"]["source"],
+            "zoom": benchmark["params"]["zoom"],
+            "mean": benchmark["stats"]["mean"],
+            "stddev": benchmark["stats"]["stddev"],
+            "median": benchmark["stats"]["median"],
+            "min": benchmark["stats"]["min"],
+            "max": benchmark["stats"]["max"],
+            "q1": benchmark["stats"]["q1"],
+            "q3": benchmark["stats"]["q3"],
+            **benchmark["extra_info"],
+        }
+
+        records.append(record)
+
+    return pd.DataFrame(records).sort_values(by=["source", "zoom"])
+
+
+df = load_benchmark_results()
+```
+
+```{python}
+#| label: plot
+#| echo: false
+
+lines = df.hvplot.line(
+    x="zoom",
+    y="median",
+    by="source",
+    line_width=2,
+    title="time to retrieve 63 image tiles at various zoom levels",
+    xlabel="zoom level",
+    ylabel="time (seconds)",
+    xticks=df["zoom"].unique(),
+    xlim=[5, 11],
+    ylim=[0, 30],
+)
+
+points = df.hvplot.scatter(
+    x="zoom",
+    y="median",
+    by="source",
+)
+# Add ribbons for IQR
+ribbons = df.hvplot.area(
+    x="zoom",
+    y="q1",
+    y2="q3",
+    by="source",
+    alpha=0.2,
+    stacked=False,
+)
+
+lines * points * ribbons
+```
+
+The benchmark results clearly show that `titiler-pgstac` will return rendered tiles much faster than the MosaicJSON service for all zoom levels.
+
+## Map browsing comparison
+
+Try browsing a map with each tile service to get a sense for what the rendering time is for each one. The viewports for the two maps are synchronized and start out at zoom level 6.
+
+::: {style="display: flex; justify-content: space-between; margin-bottom: 1em;"}
+### titiler-pgstac {style="margin: 0;"}
+### mosaicjson {style="margin: 0;"}
+:::
+
+```{python}
+#| echo: false
+#| label: synchronized-maps
+#| tags: [interactive]
+
+m = DualMap(location=(65, 30), zoom_start=6, tiles="openstreetmap")
+
+# titiler parameters
+zmin, zmax = 0, 200
+gamma = 1.06
+params = {
+    "bidx": 1,
+    "rescale": f"{str(zmin)},{str(zmax)}",
+    "colormap_name": "gist_earth_r",
+    "color_formula": f"gamma r {str(gamma)}",
+    "nodata": "nan",
+    "minzoom": 6,
+}
+
+titiler_pgstac_params = urlencode({"assets": "tif", **params})
+titiler_pgstac_tiles = TileLayer(
+    tiles=(
+        "https://titiler-pgstac.maap-project.org/collections/icesat2-boreal/tiles/WebMercatorQuad/{z}/{x}/{y}?"
+        + titiler_pgstac_params
+    ),
+    name="titiler-pgstac",
+    overlay=True,
+    min_zoom=6,
+    attr="NASA MAAP",
+).add_to(m.m1)
+
+mosaic_json_tiles = TileLayer(
+    tiles=(
+        "https://titiler.maap-project.org/mosaics/cb39d9f9-4b7b-4812-a350-629f9f27fa3a/tiles/{z}/{x}/{y}.png?"
+        + urlencode(params)
+    ),
+    name="mosaicjson",
+    min_zoom=6,
+    attr="NASA MAAP",
+).add_to(m.m2)
+
+
+# Create legend object
+def apply_gamma(color, gamma):
+    return (np.array(color) ** gamma).tolist()
+
+cmap = plt.get_cmap("gist_earth_r")
+colors = cmap(np.linspace(0, 1, 10))  # Sample 10 colors for gradient
+
+corrected_colors = [apply_gamma(color[:3], gamma) for color in colors]
+hex_colors = [matplotlib.colors.rgb2hex(c) for c in corrected_colors]
+
+gradient_css = ", ".join(hex_colors)
+
+legend_html = f"""
+<div style="position: relative; width: 100%; height: 80px; margin-top: 5px;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <!-- Top labels with min, midpoint, and max -->
+        <div style="
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px; /* Reduced space */
+            font-size: 0.8em; /* Smaller font */
+        ">
+            <span>{str(zmin)}</span>
+            <span>{str(int((zmin + zmax) / 2))}</span>
+            <span>{str(zmax)}</span>
+        </div>
+        <!-- Gradient bar -->
+        <div style="
+            width: 300px;
+            height: 15px; /* Reduced height */
+            background: linear-gradient(to right, {gradient_css});
+            border: 1px solid #ccc;
+            margin-bottom: 5px; /* Reduced space */
+        "></div>
+        <!-- Biomass label ensuring it's distinct and visible -->
+        <div style="
+            display: flex;
+            justify-content: center;
+            font-size: 0.8em; /* Smaller font */
+        ">
+            <span>aboveground biomass (Mg/ha)</span>
+        </div>
+    </div>
+</div>
+"""
+display(m)
+display(HTML(legend_html))
+```
+
+:::{.callout-note}
+No tiles will be rendered if you zoom out beyond zoom level 6!
+:::

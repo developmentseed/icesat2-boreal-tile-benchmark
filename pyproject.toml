@@ -5,11 +5,25 @@ description = "Benchmarks for tile rendering performance for the icesat2-boreal 
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "folium>=0.19.2",
     "httpx>=0.28.1",
+    "hvplot>=0.11.1",
+    "ipyleaflet>=0.19.2",
+    "ipython==8.28.0",
+    "matplotlib>=3.10.0",
     "morecantile>=6.1.0",
+    "pandas>=2.2.3",
+    "pyparsing>=3.2.0",
     "pytest>=8.3.4",
     "pytest-benchmark>=5.1.0",
 ]
 
 [tool.pytest.ini_options]
 addopts = "-vv"
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.3.3",
+    "jupyterlab-code-formatter>=3.0.2",
+    "ruff>=0.8.3",
+]

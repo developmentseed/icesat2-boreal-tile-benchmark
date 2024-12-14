@@ -1,0 +1,24 @@
+project:
+  type: website
+
+website:
+  title: "icesat2-boreal tile benchmarking"
+  site-url: "https://developmentseed.org/icesat2-boreal-tile-benchmark"
+  repo-url: https://github.com/developmentseed/icesat2-boreal-tile-benchmark"
+  repo-actions: [edit, issue]
+  page-navigation: true
+
+  page-footer:
+    right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
+  navbar:
+    right:
+      - icon: github
+        href: https://github.com/developmentseed/icesat2-boreal-tile-benchmark
+format:
+  html:
+    theme: 
+      light: [flatly, styles.scss]
+      dark: [darkly, styles.scss]
+
+
+
