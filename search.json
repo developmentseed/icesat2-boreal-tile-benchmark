@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "icesat2-boreal tile benchmarking",
+    "section": "",
+    "text": "Tile rendering time has a big impact on the user experience so our mission is to minimize the time it takes to properly render tiles."
+  },
+  {
+    "objectID": "index.html#icesat2-boreal-collection",
+    "href": "index.html#icesat2-boreal-collection",
+    "title": "icesat2-boreal tile benchmarking",
+    "section": "icesat2-boreal collection",
+    "text": "icesat2-boreal collection\n\nThe icesat2-boreal collection is a MAAP dataset contains aboveground biomass predictions for the boreal region. The predictions are stored in cloud-optimized geotiffs (COGs) in AWS S3 storage. The collection can be visualized using dynamic tiling applications like titiler. For more details about the underlying data, check out the product page.\nRelevant details: - resolution: 30 meters - ~2000 COGs in 60 km tiles"
+  },
+  {
+    "objectID": "index.html#tiling-service-details",
+    "href": "index.html#tiling-service-details",
+    "title": "icesat2-boreal tile benchmarking",
+    "section": "Tiling service details",
+    "text": "Tiling service details\n\ntitiler-pgstac: /collections/{collection_id}/tiles endpoint\n\nQueries a pgstac database to determine which STAC items in the icesat2-boreal collection are required to render an image for an XYZ tile\nRequires a Lambda and Postgresql database to be deployed\nStruggles to render tiles at zoom levels 5 and below\n\n\n\ntitiler: /mosaicjson/{mosaic_id}/tiles endpoint\n\nQueries a MosaicJSON document in a dynamodb table to get the pre-calculated list of assets required to render an image for an XYZ tile\nDoes not require a database instance\nStruggles to render tiles at zoom levels 6 and below"
+  },
+  {
+    "objectID": "index.html#tile-rendering-benchmark-comparison",
+    "href": "index.html#tile-rendering-benchmark-comparison",
+    "title": "icesat2-boreal tile benchmarking",
+    "section": "Tile rendering benchmark comparison",
+    "text": "Tile rendering benchmark comparison\nThis benchmark simulates map browsing behavior by requesting a viewport of 63 tiles (9×7 grid) centered at -102°W, 57°N. The test makes concurrent requests using async/await to mirror how modern web browsers load map tiles.\nWe are testing two dynamic tile rendering services that use different methods to construct the list of assets required for each tile. Both services are deployed as serverless functions on AWS in the us-west-2 region and are reading raster data from the same S3 bucket and returning rendered tile images to the client.\nEach test includes warmup iterations and multiple rounds to ensure reliable measurements. Results show the total time to load a complete viewport, with success and error counts providing insight into service reliability. Lower response times indicate better perceived performance for end users.\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nThe benchmark results clearly show that titiler-pgstac will return rendered tiles much faster than the MosaicJSON service for all zoom levels."
+  },
+  {
+    "objectID": "index.html#maps",
+    "href": "index.html#maps",
+    "title": "icesat2-boreal tile benchmarking",
+    "section": "Maps",
+    "text": "Maps\nTry browsing a map with each tile service to get a sense for what the rendering time is for each one."
+  }
+]
