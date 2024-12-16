@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "icesat2-boreal tile benchmarking",
     "section": "",
-    "text": "Tile rendering time has a big impact on the user experience so the goal is to minimize the time it takes to properly render tiles."
+    "text": "Tile rendering time has a big impact on the user experience so the goal is to minimize the time it takes to properly render tiles. This report contains a comparison between two systems for serving dynamic tiles from the icesat2-boreal collection."
   },
   {
     "objectID": "index.html#icesat2-boreal-collection",
     "href": "index.html#icesat2-boreal-collection",
     "title": "icesat2-boreal tile benchmarking",
     "section": "icesat2-boreal collection",
-    "text": "icesat2-boreal collection\n\nThe icesat2-boreal collection is a MAAP dataset contains aboveground biomass predictions for the boreal region. The predictions are stored in cloud-optimized geotiffs (COGs) in AWS S3 storage. The collection can be visualized using dynamic tiling applications like titiler. For more details about the underlying data, check out the product page.\nRelevant details:\n\nresolution: 30 meters\n~4900 90x90 km COGs"
+    "text": "icesat2-boreal collection\n\nThe icesat2-boreal collection is a MAAP dataset contains aboveground biomass predictions for the boreal region. The predictions are stored in cloud-optimized geotiffs (COGs) in AWS S3 storage. The collection can be visualized using dynamic tiling applications like titiler. For more details about the underlying data, check out the product page.\nCollection details:\n\n30 meter resolution\n~4900 90x90 km COGs"
   },
   {
     "objectID": "index.html#tiling-service-details",
