@@ -1,0 +1,14 @@
+color:
+  palette:
+    orange: "#cf3f02"
+  primary: orange
+
+logo: 
+  medium: logo.png
+
+typography:
+  fonts:
+    - family: Roboto
+      source: google
+  base: Roboto
+  headings: Roboto

@@ -5,7 +5,10 @@ date: 2024-12-13
 Tile rendering time has a big impact on the user experience so the goal is to minimize the time it takes to properly render tiles.
 
 ## icesat2-boreal collection
-<img src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/10/boreal_forest_above_ground_biomass_density/23753507-5-eng-GB/Boreal_Forest_Above_Ground_Biomass_Density_pillars.png" width="500"/>
+<img
+  src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/10/boreal_forest_above_ground_biomass_density/23753507-5-eng-GB/Boreal_Forest_Above_Ground_Biomass_Density_pillars.png"
+  width="500"
+/>
 
 The icesat2-boreal collection is a MAAP dataset contains aboveground biomass predictions for the boreal region. The predictions are stored in cloud-optimized geotiffs (COGs) in AWS S3 storage. The collection can be visualized using dynamic tiling applications like `titiler`. For more details about the underlying data, check out the [product page](https://ceos.org/gst/icesat2-boreal-biomass.html).
 
@@ -36,20 +39,13 @@ Each test includes warmup iterations and multiple rounds to ensure reliable meas
 
 
 ```{python}
-#| label: load
-#| echo: false
+# | label: load
+# | echo: false
 
 import json
-from urllib.parse import urlencode
 
-import hvplot.pandas
-import matplotlib.colors
-import matplotlib.pyplot as plt
-import numpy as np
+import hvplot.pandas  # noqa
 import pandas as pd
-from folium import Element, TileLayer
-from folium.plugins import DualMap
-from IPython.display import HTML, display
 
 
 def load_benchmark_results() -> pd.DataFrame:
@@ -82,8 +78,9 @@ df = load_benchmark_results()
 ```
 
 ```{python}
-#| label: plot
-#| echo: false
+# | label: plot
+# | echo: false
+
 
 lines = df.hvplot.line(
     x="zoom",
@@ -128,9 +125,18 @@ Try browsing a map with each tile service to get a sense for what the rendering 
 :::
 
 ```{python}
-#| echo: false
-#| label: synchronized-maps
-#| tags: [interactive]
+# | echo: false
+# | label: synchronized-maps
+# | tags: [interactive]
+
+from urllib.parse import urlencode
+
+import matplotlib.colors
+import matplotlib.pyplot as plt
+import numpy as np
+from folium import TileLayer
+from folium.plugins import DualMap
+from IPython.display import HTML, display
 
 m = DualMap(location=(65, 30), zoom_start=6, tiles="openstreetmap")
 
@@ -172,6 +178,7 @@ mosaic_json_tiles = TileLayer(
 # Create legend object
 def apply_gamma(color, gamma):
     return (np.array(color) ** gamma).tolist()
+
 
 cmap = plt.get_cmap("gist_earth_r")
 colors = cmap(np.linspace(0, 1, 10))  # Sample 10 colors for gradient

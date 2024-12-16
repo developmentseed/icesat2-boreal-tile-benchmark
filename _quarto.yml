@@ -9,6 +9,7 @@ website:
   page-navigation: true
 
   page-footer:
+    left: "[developmentseeed.org](https://developmentseed.org)"
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
   navbar:
     right:
