@@ -7,7 +7,7 @@ from morecantile import tms
 
 TILE_CONFIGS = {
     "titiler-pgstac": {
-        "url": "https://titiler-pgstac.maap-project.org/collections/icesat2-boreal/tiles/WebMercatorQuad/{z}/{x}/{y}",
+        "url": "https://titiler.maap-project.org/collections/icesat2-boreal/tiles/WebMercatorQuad/{z}/{x}/{y}",
         "extra_params": {"assets": "tif", "nodata": "nan"},
     },
     "mosaicjson": {
