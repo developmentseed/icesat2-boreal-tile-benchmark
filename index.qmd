@@ -31,7 +31,6 @@ We are testing two dynamic tile rendering services that use different methods to
 ### titiler: `/mosaicjson/{mosaic_id}/tiles` endpoint 
 - Queries a MosaicJSON document in a dynamodb table to get the pre-calculated list of assets required to render an image for an XYZ tile
 - Requires a Lambda but does not require a database instance
-- Struggles to render tiles at zoom levels 6 and below
 
 ## Tile rendering benchmark comparison
 This benchmark simulates map browsing behavior by requesting a viewport of 63 tiles (9×7 grid) centered at -102°W, 57°N. The test makes concurrent requests using async/await to mirror how modern web browsers load map tiles.
@@ -114,7 +113,7 @@ ribbons = df.hvplot.area(
 lines * points * ribbons
 ```
 
-The benchmark results clearly show that `titiler-pgstac` will return rendered tiles much faster than the MosaicJSON service for all zoom levels.
+The benchmark results show that `titiler-pgstac` and `mosaicjson` methods will return rendered tiles in about the same time regardless of zoom level. The `mosaicjson` service slightly out-performs the `titiler-pgstac` service at lower zoom levels, probably because the asset identification for each tile has been pre-computed in the `mosaicjson` document.
 
 ## Map browsing comparison
 
